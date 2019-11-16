@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{useState} from 'react';
 import './App.css';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
@@ -14,17 +14,28 @@ const useStyles = makeStyles(theme => ({
     fontFamily: 'Josefin Sans',
     fontSize:'20px',
     textTransform:'lowercase'
-
   }
 }));
 
 
 function App() {
   const classes = useStyles();
+  //My state
+  const [nav,setNav] =useState({
+    show:false
+  }); 
+
+  const showPanel =() => {
+    let t = nav.show;
+    setNav({
+      show:!t
+    });
+  }
+
   return (
     <div className="App">
-     <Navbar/>
-     <Mainbody/>
+     <Navbar slider = {showPanel} />
+     <Mainbody sliderStatus ={nav} />
     </div>
   );
 }

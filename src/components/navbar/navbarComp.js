@@ -20,22 +20,20 @@ const useStyles = makeStyles(theme => ({
       flexGrow: 1,
     },
   }));
-const NavbarComp = () =>{
+const NavbarComp = (props) =>{
     const classes = useStyles();
 
-    const showPanel =() => {
-      console.log('Side panel shown');
-    }
+    
 
     return (<div  className={classes.root} >
          <AppBar position="static" style={{ background: '#244093', position:'absolute' }}>
         <Toolbar>
-          <IconButton onClick={showPanel}  edge="start" className={classes.menuButton} color="inherit" 
+          <IconButton onClick={props.slider} edge="start" className={classes.menuButton} color="inherit" 
           aria-label="menu">
             <MenuIcon/>
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-          {/*<img className="imgFile" src={logo}/>*/}
+          <img className="imgFile" src={logo}/>
           </Typography>
           <Button color="inherit">Login</Button>
         </Toolbar>
