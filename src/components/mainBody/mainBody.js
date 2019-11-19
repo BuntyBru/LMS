@@ -10,7 +10,7 @@ const MainBody = (props) =>{
     if(props.sliderStatus.show == false)
     {
         console.log("Side Menu should not be shown");
-        sidePanel = '';
+        sidePanel = <div className='nothing'></div>;
         mainPanel = <div className='col-lg-12 col-sm-12 col-xs-12 col-md-12'> </div>   
     }
     else

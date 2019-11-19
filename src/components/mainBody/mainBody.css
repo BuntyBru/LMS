@@ -11,4 +11,15 @@
     padding-left: 0;
     background: #244093;
     color: white;
+    transition: 1s;
+    width:100%;
+    transition-timing-function: ease-out;
+    overflow:auto;
+    padding: 0;
+    
+} 
+
+.nothing
+{
+    width: 0%;
 }

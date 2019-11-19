@@ -26,7 +26,7 @@ const NavbarComp = (props) =>{
     
 
     return (<div  className={classes.root} >
-         <AppBar position="static" style={{ background: '#244093', position:'absolute' }}>
+         <AppBar position="static" style={{ background: '#244093', position:'absolute', zIndex:1 }}>
         <Toolbar>
           <IconButton onClick={props.slider} edge="start" className={classes.menuButton} color="inherit" 
           aria-label="menu">
