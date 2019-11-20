@@ -6,6 +6,9 @@ import axios from 'axios';
 const MainPage = () => {
 
     const [groupData, setGroupData] = useState([]);
+    const [groupCount,setGroupCount] =useState();
+
+   
 
 
     useEffect(
@@ -16,6 +19,8 @@ const MainPage = () => {
             return response.json();
         }).then(response=>{
                 console.log("this is the response of the main API",response);
+                let groupCount = response.groups_count;
+                setGroupCount(groupCount);
                 const allgroups = [];
                 for(let i in response.groups)
                 {
@@ -44,8 +49,8 @@ const MainPage = () => {
     
     
     return (<div>
-        <UpperBar/>
-        <TablePart tableData = {groupData} />
+        <UpperBar   dataCount = {groupCount}  settingData ={setGroupData}/>
+        <TablePart tableData = {groupData}/>
     </div>
         )
 }

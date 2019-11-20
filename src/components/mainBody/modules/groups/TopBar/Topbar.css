@@ -1,0 +1,14 @@
+.totalCount
+{
+    padding: 10px;
+    background: lightblue;
+    font-weight: 600;
+    line-height: 2;
+    text-align: center;
+
+}
+
+.searchBar
+{
+    text-align: right;
+}

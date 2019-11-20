@@ -10,6 +10,9 @@ import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Paper from '@material-ui/core/Paper';
 import './table.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlusCircle } from '@fortawesome/free-solid-svg-icons'
+
 
 
 
@@ -212,6 +215,7 @@ export default function EnhancedTable(props) {
 
   return (
     <div className={classes.root}>
+     <FontAwesomeIcon className='addIcon' icon={faPlusCircle} />
       <Paper className={classes.paper}>
        
         <div className={classes.tableWrapper}>
@@ -280,8 +284,10 @@ export default function EnhancedTable(props) {
           onChangePage={handleChangePage}
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
+       
       </Paper>
      
+      
     </div>
   );
 }

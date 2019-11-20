@@ -4,3 +4,12 @@
     top:720px;
 
 }
+
+.addIcon
+{
+    font-size: 61px;
+    color: crimson;
+    cursor: pointer;
+    position: absolute;
+    left: 0;
+}
