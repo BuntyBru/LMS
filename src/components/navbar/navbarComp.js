@@ -33,9 +33,9 @@ const NavbarComp = (props) =>{
             <MenuIcon/>
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-          <img className="imgFile" src={logo}/>
+          <img className="imgFile" alt='Logo' src={logo}/>
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Button color="inherit">Logout</Button>
         </Toolbar>
       </AppBar>
         

@@ -16,10 +16,17 @@
     transition-timing-function: ease-out;
     overflow:auto;
     padding: 0;
-    
+    font-family: 'Ubuntu', sans-serif;
+    height: 100%;
 } 
 
 .nothing
 {
     width: 0%;
+}
+
+.mainBarPart
+{
+    padding-top: 64px;
+    
 }
