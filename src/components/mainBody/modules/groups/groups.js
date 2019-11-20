@@ -1,26 +1,51 @@
-import React from 'react';
+import React, {useEffect,useState} from 'react';
 import TablePart from './Table/table'
 import UpperBar from './TopBar/Topbar'
+import axios from 'axios';
 
 const MainPage = () => {
 
+    const [groupData, setGroupData] = useState([]);
 
-    const getMainData = () => {
-        fetch('https://aubank-dev.loktra.com/api/v1/telecaller/groups?page=1&offset=30',{
-            headers:{ 'Content-Type':  'application/json',
-             'id':'0b98ff64-4669-4444-9356-0e038d2aaff3',
-             'token':'17625384-a0b0-4930-8822-45e8005cc17d',
-              'source':'desktop-dashboard'}
+
+    useEffect(
+          (() => {
+            fetch('https://lmsys-91d82.firebaseio.com/data.json',{
+                headers:{'Content-Type':'application/json'}
+            }).then(response => {
+            return response.json();
         }).then(response=>{
-            console.log("this is the response of the main API",response);
-        }).catch(error => {
-            console.log("Error has been found",error)
-        })
-    }
-    getMainData();
+                console.log("this is the response of the main API",response);
+                const allgroups = [];
+                for(let i in response.groups)
+                {
+                    allgroups.push({
+                        name : response.groups[i].group_name,
+                        channels:response.groups[i].lead_sources_count,
+                        products:response.groups[i].display_products_count,
+                        pincodes_count:response.groups[i].pincodes_count,
+                        employees_count:response.groups[i].primary_group_members_count + response.groups[i].secondary_group_members_count
+                    });
+                }
+                setGroupData(allgroups);
+                
+                
+            }).catch(error => {
+                console.log("Error has been found",error)
+            })
+        
+        }),[]
+
+    )
+
+    console.log("this is groupData",groupData);
+
+
+    
+    
     return (<div>
         <UpperBar/>
-        <TablePart/>
+        <TablePart tableData = {groupData} />
     </div>
         )
 }
