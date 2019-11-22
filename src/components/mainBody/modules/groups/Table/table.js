@@ -12,8 +12,7 @@ import Paper from '@material-ui/core/Paper';
 import './table.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons'
-
-
+import {Link} from 'react-router-dom';
 
 
 function desc(a, b, orderBy) {
@@ -211,11 +210,11 @@ export default function EnhancedTable(props) {
  
 
   const isSelected = name => selected.indexOf(name) !== -1;
-
+ 
 
   return (
     <div className={classes.root}>
-     <FontAwesomeIcon className='addIcon' icon={faPlusCircle} />
+    <Link to="/add-group"><FontAwesomeIcon className='addIcon' icon={faPlusCircle}/></Link> 
       <Paper className={classes.paper}>
        
         <div className={classes.tableWrapper}>

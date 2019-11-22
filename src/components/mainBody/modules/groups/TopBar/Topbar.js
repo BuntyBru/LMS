@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState, useRef} from 'react';
 import './Topbar.css';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -28,7 +28,11 @@ const Topbar = (props) => {
     const [filteredName,setFilteredName] = useState('');
     const classes = useStyles();
 
-   
+   const inputRef = useRef();
+
+   const checkingRef =() =>{
+     console.log("this is the value of input",inputRef.current.value);
+       }
 
 return (<div className='container'>
     <div className='row'>
@@ -39,17 +43,10 @@ return (<div className='container'>
     <div className='col-lg-10 col-sm-10 col-md-10 col-xs-10 searchBar'>
     <form className={classes.container} noValidate autoComplete="off">
       <div>
-        <TextField
-          id="standard-basic"
-          className={classes.textField}
-          label="Enter Group Name"
-          margin="normal"
-          value={filteredName}
-          onChange={(event)=>setFilteredName(event.target.value)}
-          
-          
-        />
-        <Button variant="contained" color="primary" className={classes.button}>
+       
+        <input type='text' value={filteredName}
+          onChange={(event)=>setFilteredName(event.target.value)} className={classes.textField} ref={inputRef}/>
+        <Button variant="contained" color="primary" className={classes.button} onClick={checkingRef}>
         Search
       </Button>
 

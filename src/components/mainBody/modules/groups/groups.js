@@ -2,14 +2,15 @@ import React, {useEffect,useState} from 'react';
 import TablePart from './Table/table'
 import UpperBar from './TopBar/Topbar'
 import axios from 'axios';
+import {Route} from 'react-router-dom';
+import GroupForm from './groupForms/groupForm';
+
 
 const MainPage = () => {
 
     const [groupData, setGroupData] = useState([]);
     const [groupCount,setGroupCount] =useState();
-
    
-
 
     useEffect(
           (() => {
@@ -49,8 +50,13 @@ const MainPage = () => {
     
     
     return (<div>
-        <UpperBar   dataCount = {groupCount}  settingData ={setGroupData}/>
+       
+        <Route path="/" exact render= {()=><div>
+            <UpperBar   dataCount = {groupCount}  settingData ={setGroupData}/>
         <TablePart tableData = {groupData}/>
+            </div>}/>
+
+             <Route path="/add-group" exact component={GroupForm}/>
     </div>
         )
 }

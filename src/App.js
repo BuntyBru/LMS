@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Navbar from './components/navbar/navbarComp';
 import Mainbody from './components/mainBody/mainBody';
 
-
+import { BrowserRouter} from 'react-router-dom';
 
 
 const useStyles = makeStyles(theme => ({
@@ -32,12 +32,13 @@ function App() {
   }
 
   return (
-    <div className="App">
-    
-     <Navbar slider = {showPanel} />
-     
-     <Mainbody sliderStatus ={nav} />
-    </div>
+    <BrowserRouter>
+     <div className="App">
+    <Navbar slider = {showPanel} /> 
+    <Mainbody sliderStatus ={nav} />
+   </div>
+    </BrowserRouter>
+   
   );
 }
 

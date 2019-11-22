@@ -1,0 +1,11 @@
+.form-group
+{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.paperPart
+{
+    margin-top:50px; 
+}
