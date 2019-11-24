@@ -4,7 +4,7 @@ import './groupForm.css';
 
 
 
-const formPack = () =>{
+const formPack = (props) =>{
 
     const formPart = [
         {
@@ -57,6 +57,8 @@ const formPack = () =>{
         <label>{formPart[i].label}</label> 
         <input/> </div>)
     }
+
+    
     
     return ( <Paper className='paperPart'>
         <div className='container'>

@@ -12,7 +12,10 @@ import Paper from '@material-ui/core/Paper';
 import './table.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons'
-import {Link} from 'react-router-dom';
+import {Link,withRouter } from 'react-router-dom';
+
+
+
 
 
 function desc(a, b, orderBy) {
@@ -140,7 +143,7 @@ const useStyles = makeStyles(theme => ({
   
 }));
 
-export default function EnhancedTable(props) {
+ function EnhancedTable(props) {
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('channels');
@@ -178,10 +181,13 @@ export default function EnhancedTable(props) {
   };
 
 
-  const handleClick = (event, name) => {
+  const handleClick = (event, name,fullDetail) => {
     const selectedIndex = selected.indexOf(name);
     let newSelected = [];
-
+    console.log("This row was clicked",fullDetail);
+    props.history.push('/groups/'+name);
+  
+  
     if (selectedIndex === -1) {
       newSelected = newSelected.concat(selected, name);
     } else if (selectedIndex === 0) {
@@ -243,7 +249,9 @@ export default function EnhancedTable(props) {
                   return (
                     <TableRow
                       hover
-                      onClick={event => handleClick(event, row.name)}
+                      onClick={event =>{
+                        handleClick(event, row.name,row);
+                      } }
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
@@ -290,3 +298,5 @@ export default function EnhancedTable(props) {
     </div>
   );
 }
+
+export default withRouter(EnhancedTable);

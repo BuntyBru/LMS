@@ -1,15 +1,20 @@
-import React, {useEffect,useState} from 'react';
+import React, {useEffect,useState, Suspense} from 'react';
 import TablePart from './Table/table'
 import UpperBar from './TopBar/Topbar'
 import axios from 'axios';
-import {Route} from 'react-router-dom';
-import GroupForm from './groupForms/groupForm';
+import {Route, Switch, Redirect} from 'react-router-dom';
+
+import GroupDetail from './groupDetail/groupDetail';
 
 
-const MainPage = () => {
+const LazyRouterGroupForm =  React.lazy(()=>import ('./groupForms/groupForm'));
+
+
+const MainPage = (props) => {
 
     const [groupData, setGroupData] = useState([]);
     const [groupCount,setGroupCount] =useState();
+    const [auth,setAuth] = useState(true);
    
 
     useEffect(
@@ -45,18 +50,23 @@ const MainPage = () => {
     )
 
     console.log("this is groupData",groupData);
-
+    console.log("============>",props)
 
     
     
     return (<div>
-       
-        <Route path="/" exact render= {()=><div>
+       <Switch>
+       <Route path="/" exact render= {()=><div>
             <UpperBar   dataCount = {groupCount}  settingData ={setGroupData}/>
         <TablePart tableData = {groupData}/>
             </div>}/>
 
-             <Route path="/add-group" exact component={GroupForm}/>
+            {auth ? <Route path="/add-group" exact render={() => <Suspense fallback={<div>Loading............</div>}
+            ><LazyRouterGroupForm/></Suspense>}/> : null }
+             <Route path="/groups/:id" exact component={GroupDetail}/>
+             <Route render={()=><h1>Not found</h1>}/>
+           </Switch>
+        
     </div>
         )
 }
