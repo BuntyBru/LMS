@@ -7,6 +7,7 @@ const initialState = {
 
 //Reducer
 const rootReducer = (state=initialState,action) => {
+    
     return state;
 };
 

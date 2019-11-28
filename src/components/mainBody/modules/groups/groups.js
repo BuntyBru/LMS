@@ -3,7 +3,7 @@ import TablePart from './Table/table'
 import UpperBar from './TopBar/Topbar'
 import axios from 'axios';
 import {Route, Switch, Redirect} from 'react-router-dom';
-
+import {connect} from 'react-redux';
 import GroupDetail from './groupDetail/groupDetail';
 
 
@@ -57,7 +57,7 @@ const MainPage = (props) => {
     return (<div>
        <Switch>
        <Route path="/" exact render= {()=><div>
-            <UpperBar   dataCount = {groupCount}  settingData ={setGroupData}/>
+            <UpperBar   dataCount = {props.ctr} clicked ={props.OnIncrementCounter}  settingData ={setGroupData}/>
         <TablePart tableData = {groupData}/>
             </div>}/>
 
@@ -71,4 +71,21 @@ const MainPage = (props) => {
         )
 }
 
-export default MainPage;
+const mapStateToProps = (state) => {
+
+    return {
+        ctr:state.ctr
+    }
+}
+
+
+const mapDispatchToProps = (dispatch) => {
+
+    return {
+        OnIncrementCounter:()=>dispatch({
+            type:'INC'
+        })
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(MainPage);
