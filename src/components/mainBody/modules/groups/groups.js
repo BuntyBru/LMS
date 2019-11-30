@@ -5,60 +5,32 @@ import axios from 'axios';
 import {Route, Switch, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import GroupDetail from './groupDetail/groupDetail';
+import * as actionCreators from '../../../../store/actions/actions';
+import {useSelector} from 'react-redux';
 
 
 const LazyRouterGroupForm =  React.lazy(()=>import ('./groupForms/groupForm'));
 
 
 const MainPage = (props) => {
-
-    const [groupData, setGroupData] = useState([]);
-    const [groupCount,setGroupCount] =useState();
     const [auth,setAuth] = useState(true);
-   
+   // const groupData2 = useSelector(state => state.groupData);
 
     useEffect(
-          (() => {
-            fetch('https://lmsys-91d82.firebaseio.com/data.json',{
-                headers:{'Content-Type':'application/json'}
-            }).then(response => {
-            return response.json();
-        }).then(response=>{
-                console.log("this is the response of the main API",response);
-                let groupCount = response.groups_count;
-                setGroupCount(groupCount);
-                const allgroups = [];
-                for(let i in response.groups)
-                {
-                    allgroups.push({
-                        name : response.groups[i].group_name,
-                        channels:response.groups[i].lead_sources_count,
-                        products:response.groups[i].display_products_count,
-                        pincodes_count:response.groups[i].pincodes_count,
-                        employees_count:response.groups[i].primary_group_members_count + response.groups[i].secondary_group_members_count
-                    });
-                }
-                setGroupData(allgroups);
-                
-                
-            }).catch(error => {
-                console.log("Error has been found",error)
-            })
-        
-        }),[]
+          (()=>{
+            props.OnTableDataFetch();
+            console.log("This will run");
+          }),[]
 
     )
-
-    console.log("this is groupData",groupData);
-    console.log("============>",props)
 
     
     
     return (<div>
        <Switch>
        <Route path="/" exact render= {()=><div>
-            <UpperBar   dataCount = {props.ctr} clicked ={props.OnIncrementCounter}  settingData ={setGroupData}/>
-        <TablePart tableData = {groupData}/>
+            <UpperBar   dataCount = {props.ctr}  />
+        <TablePart tableData = {props.groupData}/>
             </div>}/>
 
             {auth ? <Route path="/add-group" exact render={() => <Suspense fallback={<div>Loading............</div>}
@@ -73,8 +45,9 @@ const MainPage = (props) => {
 
 const mapStateToProps = (state) => {
 
-    return {
-        ctr:state.ctr
+    return {   
+        ctr:state.ctr,
+        groupData:state.groupData
     }
 }
 
@@ -82,9 +55,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 
     return {
-        OnIncrementCounter:()=>dispatch({
-            type:'INC'
-        })
+      
+        OnTableDataFetch:()=>dispatch(actionCreators.asyncTableData())
     }
 }
 

@@ -155,6 +155,8 @@ const useStyles = makeStyles(theme => ({
   function createData(name, channels, products, pincodes_count, employees_count) {
     return { name, channels, products, pincodes_count, employees_count };
   }
+
+  console.log("Table Data Props", props);
   
   const rows = [];
   for(let i =0 ;i< props.tableData.length;i++)

@@ -2,10 +2,13 @@ import React, {useState} from 'react';
 import Paper from '@material-ui/core/Paper';
 import './groupForm.css';
 import Button from '@material-ui/core/Button';
+import {Link,withRouter } from 'react-router-dom';
+import {connect} from 'react-redux';
+import * as actionCreators from '../../../../../store/actions/actions';
 
 
 const FormPack = (props) =>{
-
+    console.log("FormPack",props)
     const [formValue,setFormValue] = useState({
       
             group_name:{
@@ -44,6 +47,9 @@ const FormPack = (props) =>{
 
     const formSubmit =() => {
         console.log("Form has been submitted",formValue);
+        //testing to change the count on the main page,
+        props.onIncrement();
+
         setFormValue({
       
             group_name:{
@@ -139,9 +145,9 @@ const FormPack = (props) =>{
         
         {mainForm}
         </div>
-        <Button variant="contained" type='button' color="primary" className='submitBtn'  onClick ={formSubmit}>
+        <Link to="/"> <Button variant="contained" type='button' color="primary" className='submitBtn'  onClick ={formSubmit}>
         Submit
-      </Button>
+      </Button></Link>
             
         </form>
        
@@ -152,4 +158,15 @@ const FormPack = (props) =>{
       </Paper>)
 }
 
-export default FormPack;
+const mapStateToProps = (state) => {
+
+    return {   
+        ctr:state.ctr,
+        groupData:state.groupData
+    }
+}
+
+
+
+
+export default connect(mapStateToProps,{onIncrement:actionCreators.increment})(FormPack);

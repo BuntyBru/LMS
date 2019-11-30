@@ -37,7 +37,7 @@ const Topbar = (props) => {
 return (<div className='container'>
     <div className='row'>
     <div className='col-lg-2 col-sm-2 col-md-2 col-xs-2 totalCount'>
-    <span onClick={props.clicked}>Total Count : {props.dataCount}</span>
+    <span >Total Count : {props.dataCount}</span>
 
     </div>
     <div className='col-lg-10 col-sm-10 col-md-10 col-xs-10 searchBar'>

@@ -32,7 +32,7 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/application">
      <div className="App">
     <Navbar slider = {showPanel} /> 
     <Mainbody sliderStatus ={nav} />
